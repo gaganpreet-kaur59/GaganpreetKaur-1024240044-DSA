@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+
+ void create(int arr[], int n) {
+int i;
+for(i=0;i<n;i++)
+{
+cin>>arr[i];
+}
+ }
+
+void display(int arr[], int n) {
+int i;
+for(i=0;i<n;i++)
+{
+cout<<arr[i];
+}
+}
+
+int insert(int arr[], int n,int pos, int val)
+{
+int i;
+for(i=n-1;i>pos;i--)
+{
+arr[i+1]=arr[i];
+}
+arr[pos]=val;
+n+=1;
+return n;
+}
+
+ int delete_(int arr[], int n,int pos)
+{
+int i;
+for(i=pos;i<n;i++)
+{
+arr[i]=arr[i+1];
+}
+n-=1;
+return n;
+}
+
+int linearSearch(int arr[], int n,int ele)
+{
+int i;
+for(i=0;i<n;i++)
+{
+if(arr[i]==ele)
+return i;
+}
+ }
+
+void exit_(int arr[], int n)
+{
+exit(0);
+return;
+}
+
+int main()
+{
+int n;
+cin>>n;
+int arr[100];
+
+int choice;
+cout<<"enter a no between 1 to 6";
+cin>>choice;
+
+switch(choice)
+{
+case 1:create(arr,n);break;
+case 2: display (arr,n); break;
+case 3:{
+cout<<"enter position and value to be inserted";
+int pos,val;
+cin>>pos>>val;
+n=insert(arr,n,pos, val);
+break;
+}
+case 4: {
+cout<<"enter position at which element is to be deleted";
+int pos;
+cin>>pos;
+n=delete_(arr,n,pos);
+break;
+}
+case 5:{
+cout<<"enter element to be searched";
+int ele;
+cin>>ele;
+linearSearch(arr,n,ele);
+break;
+}
+case 6:{
+exit_(arr,n);
+break;
+}
+ }
+return 0;
+  }
