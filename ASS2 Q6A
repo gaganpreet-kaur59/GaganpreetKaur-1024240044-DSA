@@ -1,1 +1,30 @@
+#include <iostream>
+#include <vector>
+using namespace std;
 
+struct Element {
+    int row;
+    int col;
+    int value;
+};
+
+int main() {
+    vector<Element> matrix = {{0, 1, 3}, {1, 0, 5}, {2, 2, 7}};
+    vector<Element> result;
+
+    for(Element e : matrix) {
+        result.push_back({e.col, e.row, e.value});
+    }
+
+    cout << "Original Matrix:" << endl;
+    for(Element e : matrix) {
+        cout << e.row << " " << e.col << " " << e.value << endl;
+    }
+
+    cout << "\nTransposed Matrix:" << endl;
+    for(Element e : result) {
+        cout << e.row << " " << e.col << " " << e.value << endl;
+    }
+
+    return 0;
+}
