@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+#define MAX 1000
+
+class MinStack {
+    int s[MAX], mins[MAX];
+    int t1, t2;
+public:
+    MinStack() { t1 = t2 = -1; }
+
+    bool empty() { return t1 == -1; }
+    bool full()  { return t1 == MAX - 1; }
+
+    void push(int x) {
+        if (full()) { cout << "Overflow!\n"; return; }
+        s[++t1] = x;
+        if (t2 == -1 || x <= mins[t2]) mins[++t2] = x;
+    }
+
+    void pop() {
+        if (empty()) { cout << "Underflow!\n"; return; }
+        int x = s[t1--];
+        if (x == mins[t2]) t2--;
+        cout << "Popped " << x << "\n";
+    }
+
+    int top() {
+        if (empty()) { cout << "Empty!\n"; return -1; }
+        return s[t1];
+    }
+
+    int getMin() {
+        if (t2 == -1) { cout << "Empty!\n"; return -1; }
+        return mins[t2];
+    }
+};
+
+int main() {
+    MinStack ms;
+    int ch, val;
+    do {
+        cout << "\n1.Push  2.Pop  3.Top  4.getMin  0.Exit\n";
+        cout << "Choice: "; cin >> ch;
+        switch (ch) {
+            case 1: cout << "Value: "; cin >> val; ms.push(val); break;
+            case 2: ms.pop(); break;
+            case 3: cout << "Top = " << ms.top() << "\n"; break;
+            case 4: cout << "Min = " << ms.getMin() << "\n"; break;
+            case 0: cout << "Bye!\n"; break;
+            default: cout << "Invalid!\n";
+        }
+    } while (ch != 0);
+    return 0;
+}
