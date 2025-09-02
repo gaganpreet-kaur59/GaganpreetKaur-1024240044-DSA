@@ -1,0 +1,26 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter size of lower triangular matrix: ";
+    cin >> n;
+    int arr[n][n];
+    cout << "Enter elements of lower triangle:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    cout << "Matrix is:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (j <= i) cout << arr[i][j] << " ";
+            else cout << "0 ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
