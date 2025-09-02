@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+#define MAX 500
+
+class IntStack {
+    int a[MAX];
+    int top;
+public:
+    IntStack() { top = -1; }
+    bool empty() { return top == -1; }
+    void push(int x) { if (top < MAX - 1) a[++top] = x; }
+    int pop() { return empty() ? 0 : a[top--]; }
+    int peek() { return empty() ? 0 : a[top]; }
+};
+
+int main() {
+    string post;
+    cout << "Enter postfix (digits & +,-,*,/): ";
+    cin >> post;
+
+    IntStack st;
+    for (char ch : post) {
+        if (isdigit((unsigned char)ch)) {
+            st.push(ch - '0');
+        } else {
+            int b = st.pop();
+            int a = st.pop();
+            int r = 0;
+            switch (ch) {
+                case '+': r = a + b; break;
+                case '-': r = a - b; break;
+                case '*': r = a * b; break;
+                case '/': r = b == 0 ? 0 : a / b; break; // basic check
+                default: cout << "Unknown op: " << ch << "\n";
+            }
+            st.push(r);
+        }
+    }
+    cout << "Result = " << st.peek() << "\n";
+    return 0;
+}
