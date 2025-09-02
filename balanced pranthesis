@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+#define MAX 500
+
+class CharStack {
+    char a[MAX];
+    int top;
+public:
+    CharStack() { top = -1; }
+    bool empty() { return top == -1; }
+    void push(char c) { if (top < MAX - 1) a[++top] = c; }
+    char pop() { return empty() ? '\0' : a[top--]; }
+    char peek() { return empty() ? '\0' : a[top]; }
+};
+
+bool match(char o, char c) {
+    return (o == '(' && c == ')') || (o == '{' && c == '}') || (o == '[' && c == ']');
+}
+
+bool isBalanced(const string &exp) {
+    CharStack s;
+    for (char ch : exp) {
+        if (ch == '(' || ch == '{' || ch == '[') s.push(ch);
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (s.empty() || !match(s.peek(), ch)) return false;
+            s.pop();
+        }
+    }
+    return s.empty();
+}
+
+int main() {
+    string expr;
+    cout << "Enter expression (no spaces): ";
+    cin >> expr;
+
+    if (isBalanced(expr)) cout << "Balanced\n";
+    else cout << "Not Balanced\n";
+    return 0;
+}
