@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter size of symmetric matrix: ";
+    cin >> n;
+
+    int sym[n][n];
+
+    cout << "Enter upper triangle elements (row-wise):" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            cin >> sym[i][j];
+        }
+    }
+
+    // copy upper half into lower half
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            sym[i][j] = sym[j][i];
+        }
+    }
+
+    cout << "Symmetric Matrix:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << sym[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
